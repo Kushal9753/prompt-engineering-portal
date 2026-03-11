@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Global resets ──────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  /* Brand */
+  --brand:       #2f8d46;
+  --brand-hover: #1e6b32;
+  --radius:      8px;
+
+  /* Dark mode palette (used in plain CSS below) */
+  --dk-bg:      #0f1117;
+  --dk-surface: #1a1d27;
+  --dk-card:    #21253a;
+  --dk-border:  #2d3251;
+  --dk-text:    #e2e8f0;
+  --dk-muted:   #94a3b8;
+  --dk-subtle:  #64748b;
+
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #1e293b;           /* strong dark slate in light mode */
+  background-color: #f8fafc;
+  transition: background-color 0.25s, color 0.25s;
+}
+
+/* ── Dark mode body ─────────────────────────────────────── */
+.dark body,
+.dark {
+  color: var(--dk-text);
+  background-color: var(--dk-bg);
+}
+
+/* ── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar              { width: 6px; height: 6px; }
+::-webkit-scrollbar-track        { background: #f1f5f9; }
+::-webkit-scrollbar-thumb        { background: #cbd5e1; border-radius: 99px; }
+.dark ::-webkit-scrollbar-track  { background: var(--dk-surface); }
+.dark ::-webkit-scrollbar-thumb  { background: var(--dk-border); }
+
+/* ════════════════════════════════════════════════════════════
+   PROSE — light mode base (darker for readability)
+═══════════════════════════════════════════════════════════ */
+.prose h2          { font-size: 1.5rem; font-weight: 700; margin: 1.5rem 0 .75rem; color: #0f172a; }
+.prose h3          { font-size: 1.15rem; font-weight: 600; margin: 1.25rem 0 .5rem; color: #1e293b; }
+.prose p           { line-height: 1.8; color: #374151; margin-bottom: 1rem; }
+.prose ul          { list-style: disc; padding-left: 1.5rem; color: #374151; margin-bottom: 1rem; }
+.prose li          { margin-bottom: .375rem; color: #374151; }
+.prose strong      { color: #111827; }
+.prose em          { color: #374151; }
+.prose a           { color: var(--brand); text-decoration: underline; }
+
+/* ════════════════════════════════════════════════════════════
+   PROSE — dark mode overrides (base heading/paragraph)
+═══════════════════════════════════════════════════════════ */
+.dark .prose h2     { color: #f1f5f9; }
+.dark .prose h3     { color: #e2e8f0; }
+.dark .prose p      { color: var(--dk-muted); }
+.dark .prose ul     { color: var(--dk-muted); }
+.dark .prose li     { color: var(--dk-muted); }
+.dark .prose strong { color: #f1f5f9; }
+.dark .prose em     { color: var(--dk-muted); }
+.dark .prose a      { color: #4ade80; }
+
+/* ── Prose inner elements — dark mode fixes ─────────────────
+   These override the hardcoded Tailwind classes that live
+   inside dangerouslySetInnerHTML HTML strings (content.js)
+   which cannot have dark: prefixes applied dynamically.
+──────────────────────────────────────────────────────────── */
+
+/* White / very-light backgrounds */
+.dark .prose .bg-white                    { background-color: var(--dk-card)   !important; }
+.dark .prose .bg-gray-50                  { background-color: var(--dk-surface) !important; }
+.dark .prose .bg-gray-100                 { background-color: var(--dk-surface) !important; }
+
+/* Borders */
+.dark .prose .border-gray-200             { border-color: var(--dk-border) !important; }
+.dark .prose .border-gray-300             { border-color: var(--dk-border) !important; }
+
+/* General text shades */
+.dark .prose .text-gray-800              { color: #e2e8f0  !important; }
+.dark .prose .text-gray-700              { color: var(--dk-muted)  !important; }
+.dark .prose .text-gray-600              { color: var(--dk-muted)  !important; }
+.dark .prose .text-gray-500              { color: var(--dk-subtle) !important; }
+
+/* Accent backgrounds (green) */
+.dark .prose .bg-green-50                { background-color: rgba(22,163,74,.12)  !important; }
+.dark .prose .border-green-200           { border-color:     rgba(22,163,74,.4)   !important; }
+.dark .prose .text-green-800             { color: #4ade80   !important; }
+.dark .prose .text-green-700             { color: #4ade80   !important; }
+.dark .prose .text-gfg-green             { color: #4ade80   !important; }
+
+/* Accent backgrounds (blue) */
+.dark .prose .bg-blue-50                 { background-color: rgba(59,130,246,.1)  !important; }
+.dark .prose .border-blue-200            { border-color:     rgba(59,130,246,.35) !important; }
+.dark .prose .text-blue-800              { color: #60a5fa   !important; }
+.dark .prose .text-blue-700              { color: #60a5fa   !important; }
+
+/* Accent backgrounds (amber/yellow) */
+.dark .prose .bg-amber-50                { background-color: rgba(245,158,11,.1)  !important; }
+.dark .prose .border-amber-200           { border-color:     rgba(245,158,11,.35) !important; }
+.dark .prose .text-amber-800             { color: #fbbf24   !important; }
+.dark .prose .text-amber-700             { color: #fbbf24   !important; }
+
+/* Accent backgrounds (red) */
+.dark .prose .bg-red-50                  { background-color: rgba(239,68,68,.1)   !important; }
+.dark .prose .border-red-200             { border-color:     rgba(239,68,68,.35)  !important; }
+.dark .prose .border-red-400             { border-color:     #ef4444              !important; }
+.dark .prose .border-red-600             { border-color:     #dc2626              !important; }
+.dark .prose .text-red-700               { color: #f87171   !important; }
+.dark .prose .text-red-800               { color: #f87171   !important; }
+
+/* Accent backgrounds (purple) */
+.dark .prose .bg-purple-50               { background-color: rgba(168,85,247,.1)  !important; }
+.dark .prose .border-purple-200          { border-color:     rgba(168,85,247,.35) !important; }
+.dark .prose .text-purple-800            { color: #c084fc   !important; }
+.dark .prose .text-purple-700            { color: #c084fc   !important; }
+
+/* Orange */
+.dark .prose .bg-orange-50               { background-color: rgba(249,115,22,.1)  !important; }
+.dark .prose .text-orange-700            { color: #fb923c   !important; }
+.dark .prose .text-orange-800            { color: #fb923c   !important; }
+
+/* Shadow-based cards — remove light shadow in dark mode */
+.dark .prose .shadow-sm                  { box-shadow: 0 1px 3px rgba(0,0,0,.5) !important; }
+
+/* Inline code chips */
+.dark .prose code:not(.code-block code)  { background-color: var(--dk-card) !important; color: #e2e8f0 !important; border-radius: 4px; padding: 0 4px; }
+
+/* Grid text inside prose */
+.dark .prose .text-gray-400              { color: var(--dk-subtle) !important; }
+
+/* ════════════════════════════════════════════════════════════
+   Dark mode — NON-PROSE global Element overrides
+   (cards, sections in page components rendered without prose)
+═══════════════════════════════════════════════════════════ */
+.dark .card-text-primary   { color: #f1f5f9; }
+.dark .card-text-secondary { color: var(--dk-muted); }
+
+/* Ensure Tailwind text- utilities cooperate with dark mode globally */
+.dark .text-gray-900  { color: #f1f5f9; }
+.dark .text-gray-800  { color: #e2e8f0; }
+.dark .text-gray-700  { color: var(--dk-muted); }
+.dark .text-gray-600  { color: var(--dk-muted); }
+.dark .text-gray-500  { color: var(--dk-subtle); }
+
+/* bg overrides for non-prose white elements */
+.dark .bg-white                     { background-color: var(--dk-card); }
+.dark .bg-gray-50                   { background-color: var(--dk-surface); }
+.dark .bg-gray-100                  { background-color: var(--dk-card); }
+
+/* Border overrides */
+.dark .border-gray-100              { border-color: var(--dk-border); }
+.dark .border-gray-200              { border-color: var(--dk-border); }
+.dark .divide-gray-100 > *          { border-color: var(--dk-border); }
+
+/* ════════════════════════════════════════════════════════════
+   Code blocks (always dark — same in both modes)
+═══════════════════════════════════════════════════════════ */
+.code-block {
+  background: #0d1117;
+  color: #c9d1d9;
+  border-radius: var(--radius);
+  font-family: 'Fira Code', Consolas, monospace;
+  font-size: .85rem;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  position: relative;
+  white-space: pre-wrap;
+  border: 1px solid #21262d;
+  line-height: 1.6;
+}
+
+/* ── Prompt block accent ────────────────────────────────── */
+.prompt-block {
+  border-left: 4px solid var(--brand);
+  background: #f0fdf4;
+  padding: 1rem 1.25rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-style: italic;
+  color: #166534;
+}
+.dark .prompt-block {
+  background: #0d1f14;
+  color: #86efac;
+  border-left-color: #4ade80;
+}
+
+/* ── Gradient text ──────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #2f8d46 0%, #16a34a 50%, #15803d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Card hover ─────────────────────────────────────────── */
+.card-hover {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(47,141,70,.15);
+}
+.dark .card-hover:hover {
+  box-shadow: 0 12px 32px rgba(0,0,0,.4);
+}
+
+/* ── Animations ─────────────────────────────────────────── */
+.animate-fade-in  { animation: fadeIn .5s ease-out both; }
+.animate-slide-up { animation: slideUp .45s ease-out both; }
+
+@keyframes fadeIn  { from { opacity: 0; }                             to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(18px);} to { opacity: 1; transform: translateY(0); } }
