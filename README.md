@@ -19,7 +19,7 @@ A modern educational web portal to learn Prompt Engineering concepts, techniques
 
 ## 🌐 Live Website
 
-https://YOUR_GITHUB_USERNAME.github.io/prompt-engineering-portal
+https://Kushal9753.github.io/prompt-engineering-portal/
 
 ## 📂 Installation
 
